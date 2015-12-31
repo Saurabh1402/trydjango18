@@ -1,5 +1,5 @@
 <nav class="navbar navbar-default navbar-static-top">
-      <div class="container-fluid">
+      <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
             <span class="sr-only">Toggle navigation</span>
@@ -27,11 +27,32 @@
               </ul>
             </li>
           </ul>
+          
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="../navbar/">Default</a></li>
-            <li class="active"><a href="./">Static top <span class="sr-only">(current)</span></a></li>
-            <li><a href="../navbar-fixed-top/">Fixed top</a></li>
+            {% if user.is_authenticated %}
+            <li >
+              <a href="{% url 'auth_logout' %}">logout<span class="sr-only">(current)</span></a>
+            </li>
+            {% else %}
+            <li>
+              <a href="{% url 'registration_register' %}">Register</a>
+            </li>
+            {% endif %}
           </ul>
+          {% if not user.is_authenticated and not "/accounts/login" in request.get_full_path %}
+            
+           <form class="navbar-form navbar-right" method="POST" action="{% url 'auth_login' %}">{% csrf_token %}
+                <div class="form-group">
+                  <input type="text" placeholder="Username" name="username"/>
+                </div>
+                
+                <div class="form-group">
+                  <input type="password" placeholder="Password" name="password"/>
+                </div>
+                <input class="btn btn-default" type="submit" value="login">
+            </form>
+           
+            {% endif %}
         </div><!--/.nav-collapse -->
       </div>
     </nav>

@@ -1,12 +1,43 @@
 body {
   min-height: 2000px;
 }
-
+.navbar {
+    position: relative;
+    min-height: 50px;
+    margin-bottom: 0px;
+    border: 2px solid #086540;
+}
+.jumbotron {
+    background-color: #06452D;
+    color: #fff;
+}
 .navbar-static-top {
-  margin-bottom: 19px;
+  margin-bottom: 0px;
 }
 
 .text-align-center{
 
 		text-align:center;
 	}
+.navbar-default {
+    background-color: #06452D;
+}
+.navbar-default .navbar-brand {
+    color: #fff;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: #AAA;
+}
+
+.navbar-default .navbar-nav > li > a:hover {
+    color: #fff;
+}
+.navbar-default .navbar-toggle {
+    border-color: transparent !important;
+    color: #fff;
+}
+.navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover {
+    background-color: #086540;
+    color: #fff;
+}
