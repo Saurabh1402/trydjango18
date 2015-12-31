@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
+{% load staticfiles %}
 
 
 
@@ -12,13 +13,15 @@
 		text-align: center;
 
 	}
+	
 
 	{% endblock %}
 	</style>
-
 	{% block jumbotron %}
+	{% if not request.user.is_authenticated %}
 		 <div class="jumbotron">
-      
+      <div class="container">
+    
 		<div class="row">
 	    	<div class=" col-md-6">
 		      <h1>Try Django 1.8</h1>
@@ -28,14 +31,38 @@
 	            <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">Join US &raquo;</a>
 	          </p>
 	        </div>
-	        <div class="col-md-6" style="height:300px;background:black;">
-	        	<video src="https://www.youtube.com/watch?v=hb4faQ5neiM"></video>
+	        <div class="col-md-6">
+	        	<iframe width="560" height="315" src="https://www.youtube.com/embed/4OlGpS2LG_M?feature=player_detailpage" frameborder="0" allowfullscreen></iframe>
 	        </div>
         </div>
+        </div>
        </div>
+	{% endif %}
 	{% endblock %}
-
 {% block content %}
+
+{% if request.user.is_authenticated %}
+<h1>Welcome  {{ request.user.first_name }} {{ request.user.last_name}}</h1>
+<hr/>
+<table class="table table-striped table-bordered table-hover">
+	<tr class="danger">
+		<th><h3>S.No.</h3></th>>
+		<th><h3>FUll Name</h3></th>>
+		<th><h3>Email Address</h3></th>>
+		<th><h3>Date &amp; Time</h3></th>>
+	</tr>
+
+{% for instance in queryset %}
+	
+	<tr>
+		<td><h3>{{forloop.counter}} </h3></td>
+		<td><h3>{{instance.full_name}}</h3></td>
+		<td><h3>{{instance}}</h3></td>
+		<td><h3>{{instance.timestamp|timesince}}</h3></td>
+	</tr>
+{% endfor %}
+</table>
+{% else %}
 <div class="row">
 	<div class="col-sm-3 pull-right">
 	<div class="text-align-center lead">{{title}}</div>
@@ -47,12 +74,24 @@
 	</div>
 	<div class="col-sm-3 lead text-align-center">
 		Built with Django &amp; Bootstrap
+		<img class="img-responsive" src="{% static 'img/twitter-bootstrap.png' %}">
 	</div>
 	<div class="col-sm-3 lead text-align-center">
-		Created for Starters of all kinds.
+		<p>Created for Starters of all kinds.</p>
+		<span class="fa-lg fa-stack fa-4x">
+		<i class="fa fa-battery-empty fa-stack-2x"></i>
+		<i class="fa fa-bolt fa-stack-2x"></i>
+		</span>
+		
 	</div>
 	<div class="col-sm-3 lead text-align-center">
-	Always Open Source
+	<p>Always Open Source</p><br/><br/>
+	<span class="fa-lg fa-stack fa-3x">
+	<i class="fa fa-circle-o-notch fa-stack-2x"></i>
+	<i class="fa fa-github fa-stack-1x"></i>
+	</span>
+
 	</div>
 </div>
+{% endif %}
 {% endblock %}

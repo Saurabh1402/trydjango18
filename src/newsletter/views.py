@@ -2,6 +2,7 @@ from django.conf import settings
 from django.shortcuts import render
 from django.core.mail import send_mail
 from .forms import ContactForm, SignUpForm
+from .models import SignUp
 
 # Create your views here.
 def home(request):
@@ -31,6 +32,12 @@ def home(request):
 	# 	title = "My Title %s"%(request.user)
 
 	#add  a form
+	
+	if request.user.is_authenticated and request.user.is_staff:
+		queryset=SignUp.objects.all()
+		context={
+			"queryset":queryset
+		}
 	return render(request,"home.html",context)
 
 def contact(request):
@@ -66,3 +73,7 @@ def contact(request):
 		"title":title,
 	}
 	return render(request,"forms.html",context)
+
+def about(request):
+	return render(request,"about.html",{})
+

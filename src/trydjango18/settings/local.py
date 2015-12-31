@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 
 # Quick-start development settings - unsuitable for production
@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '4lur)4=nxc@$#3j8$r%(le2cu^d)@ow^h14qr&cii7+5#++(q!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'srbhvishwakarma22@gmail.com'
@@ -136,5 +136,5 @@ ACCOUNT_ACTIVATION_DAYS = 7
 # REGISTRATION_DEFAULT_FROM_EMAIL = 'srbhvishwakarma22@gmail.com'
 REGISTRATION_EMAIL_HTML = True
 REGISTRATION_AUTO_LOGIN = True
-
+LOGIN_REDIRECT_URL = '/' 
 SITE_ID = 1
